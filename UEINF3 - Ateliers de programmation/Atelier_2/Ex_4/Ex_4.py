@@ -66,10 +66,10 @@ def afficheHisto1(F:list)->str:
     Returns:
         str: réprésentation graphique en str
     """
+    #---OBTENU GRÂCE À ChatGPT--
     H = histo(F)
     MAXOCC = max(H)
-    var = ""
-    nbr = ""
+    
     for i in range(MAXOCC, 0, -1):
         for j in range(len(H)):
             if H[j] >= i:
@@ -77,6 +77,9 @@ def afficheHisto1(F:list)->str:
             else:
                 print(' ', end=' ')
         print() #permet de passer à une autre ligne
+   
+    var = ""
+    nbr = ""
     for i in range (len(H)):
         var += "|- "
         nbr += str(i) + "  "
@@ -90,7 +93,7 @@ afficheHisto1(F)
 
 import matplotlib.pyplot as plt
 
-def afficheHisto2(F:list)->plt:
+def afficheHisto2(F:list):
     """Affiche une réprésentaiton graphique de l'histogramme associé à la liste d'entiers F
     Args:
         F (list): liste d'entiers
