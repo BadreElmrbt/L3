@@ -1,5 +1,7 @@
 from random import *
-import time 
+import time
+import matplotlib.pyplot as plt
+import numpy as np
 
 # Exercice 1
 def gen_list_random_int(len_max: int = 10, int_binf: int = 0, int_bsup: int = 10) -> list:
@@ -92,60 +94,40 @@ def test_functions():
 #test_functions()
 
 #Exercice 5
+#Question 1
 
-import time
-
-def perf_mix(mix_list, shuffle, listInt, n):
+def perf_mix(shuffle, mix_list, listInt, n):
     tab2 = []
     tab3 = []
-
     for i in listInt:
         times_shuffle = []
         times_mix = []
-
         for _ in range(n):
             liste = gen_list_random_int(i)
-
             start_pc = time.perf_counter()
             shuffle(liste)
             end_pc = time.perf_counter()
             times_shuffle.append(end_pc - start_pc)
-
+            
             start_pc = time.perf_counter() 
             mix_list(liste)
             end_pc = time.perf_counter()
             times_mix.append(end_pc - start_pc)
-
+            
         tab2.append(sum(times_shuffle) / n)
         tab3.append(sum(times_mix) / n)
 
     return (tab2, tab3)
 
-print(perf_mix(mix_list, shuffle, [10, 500, 5000, 50000, 100000], 100))
+listInt = [5, 10, 15]
+result = perf_mix(shuffle, mix_list, listInt, 20)
 
+fig, ax = plt.subplots()
+ax.plot(listInt, result[0], 'bo-', label='shuffle')
+ax.plot(listInt, result[1], 'r*-', label='mix_list')
+ax.set(xlabel='Taille de la liste', ylabel='Temps (s)',
+       title='Performance de shuffle et mix_list (10 tests)')
+ax.legend(loc='upper center', shadow=True, fontsize='x-large')
+plt.show()
 
-
-
-
-# Exemple d'utilisation 
-list1 = gen_list_random_int()
-print(list1)
-n = 10
-start_pc = time.perf_counter() 
-
-for i in range(n): 
-    shuffle(list1)
-end_pc = time.perf_counter()
-elapsed_time_pc = end_pc-start_pc 
-
-print("Temps écoulé entre les deux mesures : ",elapsed_time_pc) 
-print("Temps estimé pour une instruction",elapsed_time_pc/n) 
-
-start_pc = time.perf_counter() 
-for i in range(n): 
-    mix_list(list1)
-end_pc = time.perf_counter()
-elapsed_time_pc = end_pc-start_pc 
- 
-print("Temps écoulé entre les deux mesures : ",elapsed_time_pc) 
-print("Temps estimé pour une instruction",elapsed_time_pc/n) 
+#Question 2
