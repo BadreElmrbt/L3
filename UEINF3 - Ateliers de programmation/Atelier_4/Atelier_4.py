@@ -114,7 +114,7 @@ def perf_extract(sample, extract_elements_list, listInt, n, int_nbr_of_element_t
         time_sample.append(sum(times_sample) / n)
     return (time_extract, time_sample)
 
-#---------------Exercice 6---------------
+
 #Question 1
 def sort_list(liste1):
     liste = list(liste1)
@@ -146,6 +146,18 @@ def perf_list2(sorted, sort_list, listInt, n):
         time_sort_list.append(sum(times_sort_list) / n)
         time_mix.append(sum(times_mix) / n)
     return (time_sort_list, time_mix)
+
+#---------------Exercice 7---------------
+#Question 1
+def stupid_sort(lst_to_sort):
+    i = 1
+    while lst_to_sort != sort_list(lst_to_sort):
+        print("TOUJOURS PAS : essai numéro : ",i)
+        lst_to_sort = mix_list(lst_to_sort)
+        i += 1
+    return lst_to_sort
+
+#print(stupid_sort([9,5,7,8,3,1,-5,2,23,"abc"]))
 
 #----------------Fonction de test----------------
 def test_functions():
@@ -196,5 +208,3 @@ def test_functions():
     ax.set(xlabel='Taille de la liste', ylabel='Temps (s)', title="Comparaison temps fonction") 
     ax.legend(loc='upper center', shadow=True, fontsize='x-large') 
     plt.show()
-
-test_functions()
