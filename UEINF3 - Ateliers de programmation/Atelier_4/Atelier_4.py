@@ -91,14 +91,15 @@ def test_functions():
     extracted_list = extract_elements_list(list1, num_to_extract)
     print("Exercice 4 - ", num_to_extract, "éléments extraits : ", extracted_list)
 
-#test_functions()
+test_functions()
 
 #Exercice 5
 #Question 1
+listNbr = [10, 500, 5000, 50000, 100000]
 
-def perf_mix(shuffle, mix_list, listInt, n):
-    tab2 = []
-    tab3 = []
+def perf_list(mix_list, shuffle, listInt, n)->callable:
+    time_shuffle = []
+    time_mix = []
     for i in listInt:
         times_shuffle = []
         times_mix = []
@@ -108,26 +109,56 @@ def perf_mix(shuffle, mix_list, listInt, n):
             shuffle(liste)
             end_pc = time.perf_counter()
             times_shuffle.append(end_pc - start_pc)
-            
             start_pc = time.perf_counter() 
             mix_list(liste)
             end_pc = time.perf_counter()
             times_mix.append(end_pc - start_pc)
-            
-        tab2.append(sum(times_shuffle) / n)
-        tab3.append(sum(times_mix) / n)
+        time_shuffle.append(sum(times_shuffle) / n)
+        time_mix.append(sum(times_mix) / n)
+    return (time_shuffle, time_mix)
 
-    return (tab2, tab3)
+result = perf_list(mix_list, shuffle, [5,10,20], 10)
 
-listInt = [5, 10, 15]
-result = perf_mix(shuffle, mix_list, listInt, 20)
+def perf_extract(sample, extract_elements_list, listInt, n, int_nbr_of_element_to_extract):
+    time_extract = []
+    time_sample = []
+    for i in listInt:
+        times_extract = []
+        times_sample = []
+        for _ in range(n):
+            liste = [gen_list_random_int(i)]
 
+            start_pc = time.perf_counter()
+            extract_elements_list(liste,int_nbr_of_element_to_extract)
+            end_pc = time.perf_counter()
+            times_extract.append(end_pc - start_pc)
+
+            start_pc = time.perf_counter() 
+            sample(liste,int_nbr_of_element_to_extract)
+            end_pc = time.perf_counter()
+            times_sample.append(end_pc - start_pc)
+
+        time_extract.append(sum(times_extract) / n)
+        time_sample.append(sum(times_sample) / n)
+
+    return (time_extract, time_sample)
+
+resultDeux = perf_extract(sample, extract_elements_list,listNbr, 100, 5 )
+
+# --------------Affichage---------------
+x_axis_list = [5,10,20]
 fig, ax = plt.subplots()
-ax.plot(listInt, result[0], 'bo-', label='shuffle')
-ax.plot(listInt, result[1], 'r*-', label='mix_list')
-ax.set(xlabel='Taille de la liste', ylabel='Temps (s)',
-       title='Performance de shuffle et mix_list (10 tests)')
-ax.legend(loc='upper center', shadow=True, fontsize='x-large')
+
+ax.plot(x_axis_list,result[0],'bo-',label='Shuffle') 
+ax.plot(x_axis_list,result[1], 'r*-', label='Mix') 
+ax.set(xlabel='Taille de la liste', ylabel='Temps (s)', title="Comparaison temps fonction") 
+ax.legend(loc='upper center', shadow=True, fontsize='x-large') 
 plt.show()
 
-#Question 2
+x_axis_list = listNbr
+fig, ax = plt.subplots()
+ax.plot(x_axis_list,resultDeux[0],'bo-',label='extract') 
+ax.plot(x_axis_list,resultDeux[1], 'r*-', label='sample') 
+ax.set(xlabel='Taille de la liste', ylabel='Temps (s)', title="Comparaison temps fonction") 
+ax.legend(loc='upper center', shadow=True, fontsize='x-large') 
+plt.show()
