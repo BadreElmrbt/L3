@@ -149,34 +149,54 @@ def perf_list2(sorted, sort_list, listInt, n):
 
 #---------------Exercice 7---------------
 #Question 1
-def stupid_sort(lst_to_sort):
-    i = 1
+def tri_stupide(lst_to_sort):
     while lst_to_sort != sort_list(lst_to_sort):
-        print("TOUJOURS PAS : essai numéro : ",i)
         lst_to_sort = mix_list(lst_to_sort)
-        i += 1
     return lst_to_sort
 
-#print(stupid_sort([9,5,7,8,3,1,-5,2,23,"abc"]))
+#Question 2
+def tri_insertion(lst_to_sort1):
+    lst_to_sort = list(lst_to_sort1)
+    for i in range (len(lst_to_sort)):
+        x = lst_to_sort[i]
+        j = i
+        while j > 0 and lst_to_sort[j - 1] > x:
+            lst_to_sort[j] = lst_to_sort[j - 1]
+            j = j-1
+        lst_to_sort[j] = x
+    return lst_to_sort
+
+#Question 3
+def tri_selection(lst_to_sort1):
+    lst_to_sort = list(lst_to_sort1)
+    for i in range(len(lst_to_sort)-2):
+        min_index = i
+        for j in range(i+1, len(lst_to_sort)-1):
+            if lst_to_sort[j] < lst_to_sort[min_index]:
+                min_index = j
+        if min_index != i :
+            lst_to_sort[i], lst_to_sort[min_index] = lst_to_sort[min_index], lst_to_sort[i]
+    return lst_to_sort
+
 
 #----------------Fonction de test----------------
 def test_functions():
-    #Exercice 1
+    # Exercice 1
     list1 = gen_list_random_int()
     print("Exercice 1 - Liste générée aléatoirement : ", list1)
 
     # Exercice 2
     list2 = mix_list(list1)
-    print("Exercice 2 - Liste mélangée : ", list2)
+    print("\nExercice 2 - Liste mélangée : ", list2)
 
     # Exercice 3
     element = choose_element_list(list1)
-    print("Exercice 3 - Élément choisi : ", element)
+    print("\nExercice 3 - Élément choisi : ", element)
 
     # Exercice 4
     num_to_extract = 3 
     extracted_list = extract_elements_list(list1, num_to_extract)
-    print("Exercice 4 -", num_to_extract, "éléments extraits : ", extracted_list)
+    print("\nExercice 4 -", num_to_extract, "éléments extraits : ", extracted_list)
 
     #Exercice 5
     result = perf_list(mix_list, shuffle, [5,10,20], 10)
@@ -198,7 +218,7 @@ def test_functions():
 
     # Exercice 6
     sorted_list = sort_list(list1)
-    print("Exercice 6 - liste triée : ", sorted_list)
+    print("\nExercice 6 - liste triée : ", sorted_list)
 
     result = perf_list2(sorted, sort_list, [5,10,20], 10)
     x_axis_list = [5,10,20]
@@ -208,3 +228,15 @@ def test_functions():
     ax.set(xlabel='Taille de la liste', ylabel='Temps (s)', title="Comparaison temps fonction") 
     ax.legend(loc='upper center', shadow=True, fontsize='x-large') 
     plt.show()
+
+    # Exercice 7
+    list3 = gen_list_random_int(5)
+    stupid_sort = tri_stupide(list3)
+    insertion_sort = tri_insertion(list3)
+    selection_sort = tri_selection(list3)
+    print("\nExercice 7 : liste à triée : ", list3,"\n    - Question 1 - tri stupide :", stupid_sort)
+    print("    - Question 2 - tri par insertion :", insertion_sort)
+    print("    - Question 3 - tri par selectiion :", selection_sort)
+
+test_functions()
+
