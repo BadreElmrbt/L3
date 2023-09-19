@@ -162,3 +162,19 @@ ax.plot(x_axis_list,resultDeux[1], 'r*-', label='sample')
 ax.set(xlabel='Taille de la liste', ylabel='Temps (s)', title="Comparaison temps fonction") 
 ax.legend(loc='upper center', shadow=True, fontsize='x-large') 
 plt.show()
+
+#----------------------Exercice 6----------------------
+#Question 1
+
+def sort_list(liste):
+    for i in range(len(liste)):
+        min_index = i
+        for j in range(i+1, len(liste)):
+            if liste[j] < liste[min_index]:
+                min_index = j
+        liste[i], liste[min_index] = liste[min_index], liste[i]
+
+    return liste
+
+l1 = [9,5,6,-5,12,5000]
+print(sort_list(l1))
