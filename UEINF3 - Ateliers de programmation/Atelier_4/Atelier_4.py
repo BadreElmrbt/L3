@@ -166,16 +166,25 @@ def tri_insertion(lst_to_sort1):
         lst_to_sort[j] = x
     return lst_to_sort
 
-#Question 3
+# Question 3
 def tri_selection(lst_to_sort1):
     lst_to_sort = list(lst_to_sort1)
-    for i in range(len(lst_to_sort)-2):
+    for i in range(len(lst_to_sort)-1):
         min_index = i
-        for j in range(i+1, len(lst_to_sort)-1):
+        for j in range(i+1, len(lst_to_sort)):
             if lst_to_sort[j] < lst_to_sort[min_index]:
                 min_index = j
-        if min_index != i :
+        if min_index != i:
             lst_to_sort[i], lst_to_sort[min_index] = lst_to_sort[min_index], lst_to_sort[i]
+    return lst_to_sort
+
+# Question 4
+def tri_bulle(lst_to_sort1):
+    lst_to_sort = list(lst_to_sort1)
+    for i in range(len(lst_to_sort)):
+        for j in range(len(lst_to_sort)-i-1):
+            if lst_to_sort[j] > lst_to_sort[j+1]:
+                lst_to_sort[j], lst_to_sort[j+1] = lst_to_sort[j+1], lst_to_sort[j]
     return lst_to_sort
 
 
@@ -234,9 +243,10 @@ def test_functions():
     stupid_sort = tri_stupide(list3)
     insertion_sort = tri_insertion(list3)
     selection_sort = tri_selection(list3)
+    bubble_sort = tri_bulle(list3)
     print("\nExercice 7 : liste à triée : ", list3,"\n    - Question 1 - tri stupide :", stupid_sort)
     print("    - Question 2 - tri par insertion :", insertion_sort)
     print("    - Question 3 - tri par selectiion :", selection_sort)
+    print("    - Question 4 - tri à bulle :", bubble_sort)
 
 test_functions()
-
