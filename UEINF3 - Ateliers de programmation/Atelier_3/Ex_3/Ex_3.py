@@ -72,7 +72,7 @@ def runGame():
         case _ :
             return None
     mot = (random.choice(pays)).lower()
-    print("Devinez le mot : ", mot)
+    print("Devinez le mot : ")
     print(outputStr(mot,[]))
     essais = 0
     erreur = ["|______","|/ \ ","| T ","| O ","|---]"]
