@@ -1,0 +1,40 @@
+Exercice 3 :
+
+Questtion 3.1 :
+
+1. Cette classe possède 2 attributs : constantes e et pi
+2. Tous les attributs et toutes les méthodes sont de type static.
+3. C'est la méthode random(). C'est une méthode de classe.
+Returns a double value with a positive sign, greater than or equal to 0.0 and less than 1.0.
+4. Il existe 4 fonctions max. Elles s'appliquent sur des types de nombre différent :
+static double	max(double a, double b)
+Returns the greater of two double values.
+static float	max(float a, float b)
+Returns the greater of two float values.
+static int	max(int a, int b)
+Returns the greater of two int values.
+static long	max(long a, long b)
+Returns the greater of two long values.
+5. La a) n'est pas correcte car il faudrait un autre attribut nécessaire pour faire la comparaison.
+À l'inverse le b) est correcte et int x = 6.
+
+Questtion 3.2 :
+1. Méthode compareTo:
+Signature : public int compareTo(String anotherString)
+Il s'agit d'une méthode d'instance.
+
+2. Il y a deux erreurs dans cette instruction :
+compareTo est une méthode d'instance, donc elle doit être appelée sur une instance de la classe String, pas directement sur la classe elle-même.
+L'assignation se fait incorrectement. Si vous voulez comparer deux chaînes, vous devez utiliser l'expression string1.compareTo(string2) et non l'assigner à une variable de type String.
+Voici un exemple correct :
+
+3. Méthode length :
+Signature : public int length()
+Il s'agit d'une méthode d'instance.
+
+4.
+length est aussi une méthode d'instance. Donc, elle doit être appelée sur une instance de la classe String.
+La syntaxe correcte serait : int lg = st.length(); pour obtenir la longueur de la chaîne st.
+
+
+
